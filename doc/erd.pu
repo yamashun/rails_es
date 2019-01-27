@@ -1,0 +1,41 @@
+@startuml erd
+skinparam class {
+    BackgroundColor METAL
+    BorderColor Black
+    ArrowColor Black
+}
+
+entity "漫画" as mangas <<M,MASTER_MARK_COLOR>> {
+    + 漫画ID [PK]
+    --
+    # 出版社ID [FK]
+    # 作者ID [FK]
+    # カテゴリID [FK]
+    タイトル
+    発売日
+    説明
+    巻
+}
+
+entity "作者" as authors <<M,MASTER_MARK_COLOR>> {
+    + 作者ID [PK]
+    --
+    氏名
+}
+
+entity "出版社" as publishers <<M,MASTER_MARK_COLOR>> {
+    + 出版社ID [PK]
+    --
+    出版社名
+}
+
+entity "カテゴリ" as categories <<M,MASTER_MARK_COLOR>> {
+    + カテゴリID [PK]
+    カテゴリ名
+}
+
+mangas "*" -do- "1" categories
+mangas "*" -do- "1" authors
+mangas "*" -do- "1" publishers
+
+@enduml
