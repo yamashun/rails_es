@@ -12,9 +12,7 @@ entity "漫画" as mangas <<M,MASTER_MARK_COLOR>> {
     # 作者ID [FK]
     # カテゴリID [FK]
     タイトル
-    発売日
     説明
-    巻
 }
 
 entity "作者" as authors <<M,MASTER_MARK_COLOR>> {
