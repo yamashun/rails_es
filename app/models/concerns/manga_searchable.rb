@@ -48,6 +48,7 @@ module MangaSearchable
                             })
     end
 
+    # multi_matchで一つのカラムにまとめて検索した場合の挙動の確認
     def manga_search(query)
       __elasticsearch__.search({
         query: {
@@ -59,6 +60,10 @@ module MangaSearchable
           }
         }
       })
+    end
+
+    # TODO それぞれのフィールドに対して検索を行う。重みづけが可能か調査。    
+    def manga_search_each_field
     end
   end
 end

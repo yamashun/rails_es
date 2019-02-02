@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Create authors:</strong>
+  <%= @manga.create_authors %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @manga.publisher %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @manga.category %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @manga.author %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @manga.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @manga.description %>
+</p>
+
+<%= link_to 'Edit', edit_manga_path(@manga) %> |
+<%= link_to 'Back', mangas_path %>
