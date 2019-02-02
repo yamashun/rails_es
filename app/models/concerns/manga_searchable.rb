@@ -49,7 +49,7 @@ module MangaSearchable
     end
 
     # multi_matchで一つのカラムにまとめて検索した場合の挙動の確認
-    def manga_search(query)
+    def es_search(query)
       __elasticsearch__.search({
         query: {
           multi_match: {

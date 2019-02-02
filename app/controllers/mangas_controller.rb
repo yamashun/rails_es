@@ -4,7 +4,11 @@ class MangasController < ApplicationController
   # GET /mangas
   # GET /mangas.json
   def index
-    @mangas = Manga.all
+    @mangas = if search_word.present?
+                Manga.es_search(search_word).records
+              else
+                Manga.all
+              end
   end
 
   # GET /mangas/1
@@ -70,5 +74,9 @@ class MangasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def manga_params
       params.require(:manga).permit(:publisher_id, :category_id, :author_id, :title, :description)
+    end
+
+    def search_word
+      @search_word ||= params[:search_word]
     end
 end

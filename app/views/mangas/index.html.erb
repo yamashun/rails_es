@@ -11,16 +11,14 @@
 </section>
 
 <div class="container" style="margin-top: 30px">
-  <div class="field has-addons has-addons-centered">
+  <%= form_tag(mangas_path, method: :get, class: "field has-addons has-addons-centered") do %>
     <div class="control">
-      <input class="input" type="text" placeholder="漫画を検索する">
+      <%= text_field_tag :search_word, @search_word, class: "input", placeholder: "漫画を検索する" %>
     </div>
     <div class="control">
-      <a class="button is-info">
-        検索
-      </a>
+      <%= submit_tag "検索", class: "button is-info" %>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <div class="container" style="margin-top: 50px">
