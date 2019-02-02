@@ -18,7 +18,6 @@
   <tbody>
     <% @mangas.each do |manga| %>
       <tr>
-        <td><%= manga.create_authors %></td>
         <td><%= manga.publisher.name %></td>
         <td><%= manga.category.name %></td>
         <td><%= manga.author.name %></td>

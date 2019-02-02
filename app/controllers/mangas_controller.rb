@@ -69,6 +69,6 @@ class MangasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manga_params
-      params.require(:manga).permit(:create_authors, :publisher_id, :category_id, :author_id, :title, :description)
+      params.require(:manga).permit(:publisher_id, :category_id, :author_id, :title, :description)
     end
 end

@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2019_01_27_114207) do
   end
 
   create_table "mangas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "create_authors"
     t.bigint "publisher_id"
     t.bigint "category_id"
     t.bigint "author_id"
