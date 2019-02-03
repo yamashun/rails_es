@@ -3,7 +3,7 @@ services:
   # es-server
   es:
     build: ./docker/es
-    container_name: elasticsearch_smaple
+    container_name: elasticsearch_sample
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
