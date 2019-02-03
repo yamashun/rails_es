@@ -36,10 +36,11 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'kaminari'
+
 gem 'elasticsearch-model', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
 gem 'elasticsearch-rails', github: 'elasticsearch/elasticsearch-rails', branch: '6.x'
 
-gem 'kaminari'
 gem "bulma-rails", "~> 0.7.2"
 
 group :development, :test do
