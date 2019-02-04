@@ -12,7 +12,8 @@ module MangaSearchable
         indexes :publisher,            type: 'keyword'
         indexes :author,               type: 'keyword'
         indexes :category,             type: 'text', analyzer: 'kuromoji'
-        indexes :title,                type: 'text', fielddata: true, analyzer: 'kuromoji'
+        # indexes :title,                type: 'text', analyzer: 'kuromoji'
+        indexes :title,                type: 'keyword'
         indexes :description,          type: 'text', analyzer: 'kuromoji'
       end
     end
