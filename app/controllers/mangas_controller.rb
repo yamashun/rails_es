@@ -5,6 +5,9 @@ class MangasController < ApplicationController
   # GET /mangas.json
   def index
     @mangas = if search_word.present?
+                # scoreを確認用
+                Manga.es_search(search_word).page(params[:page] || 1).per(5).records.each_with_hit { |record, hit| puts "* #{record.title}: #{hit._score}" }
+                
                 Manga.es_search(search_word).page(params[:page] || 1).per(5).records
               else
                 Manga.page(params[:page] || 1).per(5)
