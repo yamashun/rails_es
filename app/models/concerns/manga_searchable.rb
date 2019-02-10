@@ -6,7 +6,7 @@ module MangaSearchable
 
     index_name "es_manga_#{Rails.env}"
 
-    settings analysis: self.katakana_analyzer_settings do
+    settings analysis: self.analyzer_settings do
       mappings dynamic: 'false' do
         indexes :id,                   type: 'integer'
         indexes :publisher,            type: 'keyword'
@@ -55,6 +55,7 @@ module MangaSearchable
           multi_match: {
             fields: %w(id publisher author category title),
             type: 'cross_fields',
+            analyzer: 'katakana_analyzer',
             query: query,
             operator: "and"
           }
@@ -66,19 +67,23 @@ module MangaSearchable
     def manga_search_each_field
     end
 
-    def katakana_analyzer_settings
+    def analyzer_settings
       {
         analyzer: {
-            katakana_analyzer: {
-                tokenizer: "kuromoji_tokenizer",
-                filter: ["katakana_readingform"]
-            }
+          katakana_analyzer: {
+            tokenizer: 'kuromoji_tokenizer',
+            filter: ['katakana_readingform', 'hiragana_to_katakana']
+          }
         },
         filter: {
-            katakana_readingform: {
-                type: "kuromoji_readingform",
-                use_romaji: false
-            }
+          katakana_readingform: {
+            type: 'kuromoji_readingform',
+            use_romaji: false
+          },
+          hiragana_to_katakana: {
+            type: 'icu_transform',
+            id: 'Hiragana-Katakana'
+          }
         }
       }
     end
