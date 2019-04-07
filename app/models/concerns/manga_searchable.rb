@@ -71,6 +71,7 @@ module MangaSearchable
       {
         analyzer: {
           katakana_analyzer: {
+            char_filter: ['nfd_normalizer'],
             tokenizer: 'kuromoji_tokenizer',
             filter: ['katakana_readingform', 'hiragana_to_katakana']
           }
@@ -83,6 +84,13 @@ module MangaSearchable
           hiragana_to_katakana: {
             type: 'icu_transform',
             id: 'Hiragana-Katakana'
+          }
+        },
+        char_filter: {
+          nfd_normalizer: {
+            type: "icu_normalizer",
+            name: "nfkc_cf",
+            mode: "compose",
           }
         }
       }
