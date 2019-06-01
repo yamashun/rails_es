@@ -1,13 +1,13 @@
 class MangasController < ApplicationController
   before_action :set_manga, only: [:show, :edit, :update, :destroy]
+  after_action :save_search_log, onli: [:index]
 
   # GET /mangas
   # GET /mangas.json
   def index
     @mangas = if search_word.present?
                 # scoreを確認用
-                Manga.es_search(search_word).page(params[:page] || 1).per(5).records.each_with_hit { |record, hit| puts "* #{record.title}: #{hit._score}" }
-                
+                # Manga.es_search(search_word).page(params[:page] || 1).per(5).records.each_with_hit { |record, hit| puts "* #{record.title}: #{hit._score}" }
                 Manga.es_search(search_word).page(params[:page] || 1).per(5).records
               else
                 Manga.page(params[:page] || 1).per(5)
@@ -81,5 +81,11 @@ class MangasController < ApplicationController
 
     def search_word
       @search_word ||= params[:search_word]
+    end
+
+    def save_search_log
+      return if search_word.blank?
+
+      SearchWordLog.create(word: search_word, hit_number: @mangas.size)
     end
 end
