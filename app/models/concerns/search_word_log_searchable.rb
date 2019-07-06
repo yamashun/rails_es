@@ -1,4 +1,4 @@
-module WordSearchLogSearchable
+module SearchWordLogSearchable
   extend ActiveSupport::Concern
 
   included do
