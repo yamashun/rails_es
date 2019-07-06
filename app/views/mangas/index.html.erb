@@ -11,8 +11,8 @@
 </section>
 
 <div class="container" style="margin-top: 30px">
-  <%= form_tag(mangas_path, method: :get, class: "field has-addons has-addons-centered") do %>
-    <div class="control">
+  <%= form_tag(mangas_path, method: :get, class: "field has-addons has-addons-centered SearchForm", autocomplete: "off") do %>
+    <div class="control SearchInput">
       <%= text_field_tag :search_word, @search_word, class: "input", placeholder: "漫画を検索する" %>
     </div>
     <div class="control">
@@ -54,5 +54,6 @@
   <%= paginate @mangas %>
 </div>
 
+<%= javascript_include_tag 'suggest' %>
 
 
