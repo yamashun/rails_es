@@ -14,6 +14,11 @@ class MangasController < ApplicationController
               end
   end
 
+  def suggest
+    suggest_words = SearchWordLog.es_search(params[:word]).aggregations["keywords"]["buckets"]
+    render json: { suggest_words: suggest_words.map{|word| word["key"]} }
+  end
+
   # GET /mangas/1
   # GET /mangas/1.json
   def show
