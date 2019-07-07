@@ -6,35 +6,42 @@ document.addEventListener('turbolinks:load', function () {
     document.querySelector(".SearchForm").submit();
   }
 
-  function removeSuggestList() {
-    const suggestList = document.querySelector("#sugget-list");
-    if (suggestList) {
-      suggestList.remove();
+  function displayNoneSuggestList () {
+    let classList = document.querySelector(".dropdown").classList;
+    if (classList.contains("is-active")) {
+      classList.remove("is-active")
+    }
+  }
+
+  function displaySuggestList() {
+    let classList = document.querySelector(".dropdown").classList;
+    if (!classList.contains("is-active")) {
+      classList.add("is-active")
     }
   }
 
   function updateSuggestWords(words) {
-    const searchInput = document.querySelector(".SearchInput");
-
     if (words.length > 0) {
+      const dropdownMenu = document.querySelector("#dropdown-menu");
+
       let wordList = "";
       words.forEach(word => {
-        wordList += `<li class="SuggetListElement" role="option">${word}</li>`;
+        wordList += `<div class="dropdown-item" role="option">${word}</div>`;
       });
 
-      const html = `<ul id="sugget-list" role="listbox">${wordList}</ul>`;
+      const html = `<div id="sugget-list" class="dropdown-content">${wordList}</div>`;
 
-      removeSuggestList();
-      searchInput.insertAdjacentHTML("beforeend", html);
+      dropdownMenu.innerHTML = html;
+      displaySuggestList();
 
-      const suggestList = document.querySelectorAll(".SuggetListElement");
+      const suggestList = document.querySelectorAll(".dropdown-item");
       if (suggestList) {
         suggestList.forEach(element => {
           element.addEventListener("click", selectSuggest);
         });
       }
     } else {
-      removeSuggestList();
+      displayNoneSuggestList();
     }
   }
 
@@ -54,7 +61,7 @@ document.addEventListener('turbolinks:load', function () {
           .catch(error => console.log(error))
       }, 300);
     } else {
-      removeSuggestList();
+      displayNoneSuggestList()
     }
   }
   const inputWord = document.querySelector("#search_word");
