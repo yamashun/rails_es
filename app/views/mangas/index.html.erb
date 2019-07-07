@@ -14,6 +14,10 @@
   <%= form_tag(mangas_path, method: :get, class: "field has-addons has-addons-centered SearchForm", autocomplete: "off") do %>
     <div class="control SearchInput">
       <%= text_field_tag :search_word, @search_word, class: "input", placeholder: "漫画を検索する" %>
+      <div class="dropdown">
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        </div>
+      </div>
     </div>
     <div class="control">
       <%= submit_tag "検索", class: "button is-info" %>
