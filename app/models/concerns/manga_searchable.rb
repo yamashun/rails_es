@@ -6,14 +6,14 @@ module MangaSearchable
 
     index_name "es_manga_#{Rails.env}"
 
-    settings do
+    settings analysis: self.analyzer_settings do
       mappings dynamic: 'false' do
         indexes :id,                   type: 'integer'
         indexes :publisher,            type: 'keyword'
         indexes :author,               type: 'keyword'
         indexes :category,             type: 'text', analyzer: 'kuromoji'
-        indexes :title,                type: 'text', analyzer: 'kuromoji'
-        indexes :description,          type: 'text', analyzer: 'kuromoji'
+        indexes :title,                type: 'text', analyzer: 'custom_kuromoji'
+        indexes :description,          type: 'text', analyzer: 'custom_kuromoji'
       end
     end
 
@@ -60,6 +60,23 @@ module MangaSearchable
           }
         }
       })
+    end
+
+    def analyzer_settings
+      {
+        analyzer: {
+          custom_kuromoji: {
+            type: 'custom',
+            char_filter: [],
+            tokenizer: "kuromoji_tokenizer",
+            filter: [
+              'kuromoji_baseform', 'kuromoji_part_of_speech',
+              'cjk_width', 'kuromoji_stemmer', 'lowercase'
+            ]
+          }
+        },
+
+      }
     end
   end
 end
