@@ -70,12 +70,18 @@ module MangaSearchable
             char_filter: [],
             tokenizer: "kuromoji_tokenizer",
             filter: [
+              'manga_synonym',
               'kuromoji_baseform', 'kuromoji_part_of_speech',
               'cjk_width', 'kuromoji_stemmer', 'lowercase'
             ]
           }
         },
-
+        filter: {
+          manga_synonym: {
+            type: 'synonym',
+            synonyms_path: 'synonym.txt',
+          },
+        }
       }
     end
   end
