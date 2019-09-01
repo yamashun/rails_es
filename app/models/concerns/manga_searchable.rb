@@ -71,6 +71,7 @@ module MangaSearchable
             tokenizer: "kuromoji_tokenizer",
             filter: [
               'manga_synonym',
+              'manga_synonym_2',
               'kuromoji_baseform', 'kuromoji_part_of_speech',
               'cjk_width', 'kuromoji_stemmer', 'lowercase'
             ]
@@ -80,6 +81,12 @@ module MangaSearchable
           manga_synonym: {
             type: 'synonym',
             synonyms_path: 'synonym.txt',
+          },
+          manga_synonym_2: {
+            type: 'synonym',
+            synonyms: [
+              'すらだん => スラムダンク',
+            ]
           },
         }
       }
